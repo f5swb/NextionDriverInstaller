@@ -28,11 +28,11 @@ sudo apt-get install libcurl4-openssl-dev
 #sudo rsync -rl pi-star@localhost:/usr/lib/arm-linux-gnueabihf .
 #cd /usr/local/include
 #sudo rsync -rl --safe-links pi-star@localhost:/usr/include/arm-linux-gnueabihf .
-
+echo "+ Erasing NextionDriver if present..."
+sudo rm /usr/local/bin/NextionDriver
 echo "+ Getting NextionDriver ..."
 cd /tmp
 rm -rf /tmp/NextionDriver
-#git clone https://github.com/ea5kl/NextionDriver.git;
 git clone https://github.com/f5swb/NextionDriver.git;
 cd /tmp/NextionDriver 2>/dev/null
 if [ "$(pwd)" != "/tmp/NextionDriver" ]; then echo "- Getting NextionDriver failed. Cannot continue."; exit; fi
@@ -94,7 +94,9 @@ helpfiles () {
     wget "https://api.brandmeister.network/v1.0/groups/" -O /tmp/groups.txt
     cp /tmp/groups.txt $FILESDIR
     #cp /tmp/NextionDriver/groups.txt $FILESDIR
-    cp /tmp/NextionDriver/stripped.csv $FILESDIR
+    wget "https://database.radioid.net/static/user.csv" -O /tmp/stripped.csv
+    #cp /tmp/stripped.csv $FILESDIR
+    cp /tmp/stripped.csv $FILESDIR
     rm -f /var/www/dashboard/mmdvmhost/lh_nextion.php
     echo "+ Copying last heard code"
     cp /tmp/NextionDriver/lh_nextion.php $FILESDIRPHP
