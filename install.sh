@@ -91,7 +91,9 @@ helpfiles () {
     rm -f /etc/groups.txt
     rm -f /etc/stripped.csv
     echo "+ Copying groups and users files"
-    cp /tmp/NextionDriver/groups.txt $FILESDIR
+    wget "https://api.brandmeister.network/v1.0/groups/" -O /tmp/groups.txt
+    cp /tmp/groups.txt $FILESDIR
+    #cp /tmp/NextionDriver/groups.txt $FILESDIR
     cp /tmp/NextionDriver/stripped.csv $FILESDIR
     rm -f /var/www/dashboard/mmdvmhost/lh_nextion.php
     echo "+ Copying last heard code"
