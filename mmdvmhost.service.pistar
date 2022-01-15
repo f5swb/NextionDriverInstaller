@@ -1,0 +1,13 @@
+[Unit]
+Description=MMDVMHost Radio Service
+After=syslog.target network.target
+Requires=nextiondriver.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/sbin/mmdvmhost.service start
+ExecStop=/usr/local/sbin/mmdvmhost.service stop
+ExecReload=/usr/local/sbin/mmdvmhost.service restart
+
+[Install]
+WantedBy=multi-user.target
